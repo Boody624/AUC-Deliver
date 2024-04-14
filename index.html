@@ -1,156 +1,78 @@
-<style>
-  /* Add some basic styling */
-  /* Make the navigation bar blue and the text centered in the middle */
-  /* Take this path for an image and make it a background image "D:\AUC\Spring 2024\Fundumentals of enterpreneurship\MVP\bgimage.jpeg"*/
-
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url("bgimage.jpeg"); /* Set the background image */
-    background-size: cover; /* Cover the entire container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-color: rgba(255, 0, 0, 0.5); /* Add a vibrant background color */
-  }
-
-  header {
-    background-color: rgba(17, 142, 237, 0.97); /* Change the background color to blue */
-    color: #fff;
-    padding: 10px;
-    text-align: center; /* Center the text */
-  }
-
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-</style>
-<script src="order.js"></script>
-<script>
-  // Declare the "orders" array
-  var orders = [];
-
-  // Import the "localStorage" object
-  var localStorage = window.localStorage;
-
-  function addOrder() {
-    var pickupLocation = document.querySelector('input[placeholder="Pick-up location"]').value;
-    var deliveryLocation = document.querySelector('input[placeholder="Delivery location"]').value;
-    var hour = document.querySelector('select[name="hour"]').value;
-    var minute = document.querySelector('select[name="minute"]').value;
-    var amPm = document.querySelector('select[name="am_pm"]').value;
-    var date = document.querySelector('input[name="date"]').value;
-
-    if (pickupLocation && deliveryLocation && hour && minute && amPm && date) {
-      var order = pickupLocation + " to " + deliveryLocation + " at " + hour + ":" + minute + " " + amPm + " on " + date;
-      orders.push(order);
-      localStorage.setItem("orders", JSON.stringify(orders));
-      var listItem = document.createElement("li");
-      listItem.textContent = order;
-      var orderList = document.getElementById("orderList");
-      orderList.appendChild(listItem);
-      alert("Your order has been added");
-
-      // Redirect to order.html
-      window.location.href = "order.html";
-    } else {
-      alert("Please fill in all the required fields");
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      background-image: url("bgbg.jpg"); /* Fix: Replace ("bgbg.jpg") with url("bgbg.jpg") */
     }
-  }
-</script>
-
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.5); /* Set the background color to transparent */
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: absolute; /* Position the container absolutely */
+      top: 50%; /* Move the container 50% from the top */
+      left: 50%; /* Move the container 50% from the left */
+      transform: translate(-50%, -50%); /* Center the container */
+    }
+    
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .form-group input {
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li> 
-        <li><a href="order.html">Order</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <!-- Add your content here -->
-  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+  <div class="container">
+    <h2>Login</h2>
     <form>
-      <div style="margin-bottom: 10px;">
-        <input type="text" placeholder="Pick-up location" required>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
       </div>
-      <div style="margin-bottom: 10px;">
-        <input type="text" placeholder="Delivery location" required>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
       </div>
-      <div style="margin-bottom: 10px;">
-        <input type="date" name="date" required>
+      <div class="form-group">
+        <button type="submit" formaction="home.html">Login</button>
       </div>
-      <div style="margin-bottom: 10px;">
-        <select name="hour" required>
-          <option value="">Hour</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <!-- Add more options for hours if needed -->
-        </select>
-        <select name="minute" required>
-          <option value="">Minute</option>
-          <option value="00">00</option>
-          <option value="15">15</option>
-          <option value="30">30</option>
-          <option value="45">45</option>
-          <!-- Add more options for minutes if needed -->
-        </select>
-        <select name="am_pm" required>
-          <option value="">AM/PM</option>
-          <option value="AM">AM</option>
-          <option value="PM">PM</option>
-        </select>
-      </div>
-      <button type="button" id="requestButton">Request</button>
     </form>
   </div>
-      
-
-  <script>
-    document.getElementById("requestButton").addEventListener("click", showMessage);
-
-    function showMessage() {
-      var pickupLocation = document.querySelector('input[placeholder="Pick-up location"]').value;
-      var deliveryLocation = document.querySelector('input[placeholder="Delivery location"]').value;
-      var hour = document.querySelector('select[name="hour"]').value;
-      var minute = document.querySelector('select[name="minute"]').value;
-      var amPm = document.querySelector('select[name="am_pm"]').value;
-      var date = document.querySelector('input[name="date"]').value;
-
-      if (pickupLocation && deliveryLocation && hour && minute && amPm && date) {
-        alert("Your request has been approved");
-        //call the function addOrder that is in order.js
-        addOrder();
-      } else {
-        alert("Please fill in all the required fields");
-      }
-    }
-  </script>
 </body>
 </html>
-
