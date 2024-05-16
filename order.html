@@ -1,96 +1,147 @@
-<style>
-        /* Add some basic styling */
-        /* Make the navigation bar blue and the text centered in the middle */
-        /* Take this path for an image and make it a background image "D:\AUC\Spring 2024\Fundumentals of enterpreneurship\MVP\bgimage.jpeg"*/
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #e0e5ec;
+            color: #4a4e69;
+            /*overflow: hidden; /* Prevent scrolling */
+        }
 
-            background-color: rgba(255, 0, 0, 0.5); /* Add a vibrant background color */
-        }
-    
-        header {
-            background-color: rgba(17, 142, 237, 0.97); /* Change the background color to blue */
-            color: #fff;
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #e0e5ec;
             padding: 10px;
-            text-align: center; /* Center the text */
         }
-    
+
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
         }
-    
+
         nav ul li {
-            display: inline;
             margin-right: 10px;
         }
-    
+
         nav ul li a {
-            color: #fff;
+            color: #6c757d;
             text-decoration: none;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
-</style>
+
+        nav ul li a:hover {
+            background-color: #add8e6;
+            color: #fff;
+        }
+
+        /* Header Styles */
+        header {
+            color: #6c757d;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .logo img {
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+        }
+
+        /* Order List Styles */
+        #orderList {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        #orderList li {
+            background-color: rgba(230, 230, 250, 0.8);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(154, 160, 175, 0.2);
+        }
+
+        #orderList li button {
+            background-color: #add8e6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #orderList li button:hover {
+            background-color: #87ceeb;
+        }
+    </style>
 </head>
 <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li> 
-                    <li><a href="order.html">Order</a></li>
-                </ul>
-            </nav>
-        </header>
-        
-        <!-- Add your content here -->
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 20vh;">
-                <h1>List of Orders</h1>
-                <ul id="orderList"></ul>
-        </div>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li> 
+            <li><a href="order.html">Order</a></li>
+            <li><a href="index.html">Login</a></li>
+        </ul>
+    </nav>
 
-        <script src="order.js"></script>
-        <script>
-            // Get the order data from localStorage
-            var orders = JSON.parse(localStorage.getItem("orders")) || [];
+    <!-- Header -->
+    <header>
+        <div class="logo"><img src="logo.png" alt="Logo"></div>
+        <h1>List of Orders</h1>
+    </header>
 
-            // Display the orders in the list
-            var orderList = document.getElementById("orderList");
-            orders.forEach(function(order) {
-                var listItem = document.createElement("li");
-                listItem.textContent = order;
-                orderList.appendChild(listItem);
-            });
+    <!-- Order List Section -->
+    <ul id="orderList"></ul>
 
-            // Function to add a new order
-            function addOrder() {
-                var pickupLocation = document.querySelector('input[placeholder="Pick-up location"]').value;
-                var deliveryLocation = document.querySelector('input[placeholder="Delivery location"]').value;
-                var hour = document.querySelector('select[name="hour"]').value;
-                var minute = document.querySelector('select[name="minute"]').value;
-                var amPm = document.querySelector('select[name="am_pm"]').value;
-                var date = document.querySelector('input[name="date"]').value;
+    <!-- JavaScript -->
+    <script>
+        // Get the order data from localStorage
+        var orders = JSON.parse(localStorage.getItem("orders")) || [];
+        var userType = localStorage.getItem("userType"); // Get the type of user
 
-                if (pickupLocation && deliveryLocation && hour && minute && amPm && date) {
-                    var order = pickupLocation + " to " + deliveryLocation + " at " + hour + ":" + minute + " " + amPm + " on " + date;
-                    orders.push(order);
-                    localStorage.setItem("orders", JSON.stringify(orders));
-                    var listItem = document.createElement("li");
-                    listItem.textContent = order;
-                    var orderList = document.getElementById("orderList");
-                    orderList.appendChild(listItem);
-                    alert("Your order has been added");
-                    
-                    // Redirect to order.html
-                    window.location.href = "order.html";
-                } else {
-                    alert("Please fill in all the required fields");
-                }
+        // Display all orders in the list
+        var orderList = document.getElementById("orderList");
+        orderList.innerHTML = ""; // Clear existing list
+        orders.forEach(function(order) {
+            var listItem = document.createElement("li");
+            listItem.textContent = order;
+
+            // If the user is a delivery personnel, add accept order button
+            if (userType === "delivery") {
+                var acceptButton = document.createElement("button");
+                acceptButton.textContent = "Accept Order";
+                acceptButton.addEventListener("click", function() {
+                    // Remove the order from the list
+                    var index = orders.indexOf(order);
+                    if (index !== -1) {
+                        orders.splice(index, 1);
+                        localStorage.setItem("orders", JSON.stringify(orders));
+                        orderList.removeChild(listItem);
+                        alert("Order accepted and removed from the list.");
+                    }
+                });
+                listItem.appendChild(acceptButton);
             }
 
-            // Call the addOrder function to add a sample order
-            addOrder();
-        </script>
+            orderList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

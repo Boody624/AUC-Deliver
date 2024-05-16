@@ -1,62 +1,224 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-        <title>About Page</title>
-        <style>
-                /* Add some basic styling */
-                /* Make the navigation bar blue and the text centered in the middle */
-                /* Take this path for an image and make it a background image "D:\AUC\Spring 2024\Fundumentals of enterpreneurship\MVP\bgimage.jpeg"*/
-            
-                body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-
-        background-color: rgba(87, 172, 237, 0.97); /* Add a vibrant background color */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e0e5ec;
+      color: #4a4e69;
+      overflow: hidden; /* Prevent scrolling */
     }
-            
-                header {
-                    background-color: rgba(17, 142, 237, 0.97); /* Change the background color to blue */
-                    color: #fff;
-                    padding: 10px;
-                    text-align: center; /* Center the text */
-                }
-            
-                nav ul {
-                    list-style-type: none;
-                    margin: 0;
-                    padding: 0;
-                }
-            
-                nav ul li {
-                    display: inline;
-                    margin-right: 10px;
-                }
-            
-                nav ul li a {
-                    color: #fff;
-                    text-decoration: none;
-                }
-            </style>
-            </head>
-            <body>
-                <header>
-                        <nav>
-                                <ul>
-                                        <li><a href="home.html">Home</a></li>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="order.html">Order</a></li>
-                                </ul>
-                        </nav>
-                </header>
+    /* Navigation Bar Styles */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #e0e5ec;
+      padding: 10px;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    nav ul li {
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: #6c757d;
+      text-decoration: none;
+      padding: 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    nav ul li a:hover {
+      background-color: #add8e6;
+      color: #fff;
+    }
+    /* Existing Styles */
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(to right, #add8e6, #e0e5ec);
+    }
+    .figure {
+      position: fixed;
+      pointer-events: none;
+      transition: transform 0.3s ease;
+    }
+    .figure:hover {
+      transform: scale(3);
+    }
+    .figure2 {
+      width: 70px;
+      height: 70px;
+      background-color: rgba(230, 230, 250, 0.3);
+      top: 90%;
+      left: 90%;
+    }
+    .figure3 {
+      width: 90px;
+      height: 90px;
+      background-color: rgba(230, 230, 250, 0.2);
+      top: 30%;
+      left: 70%;
+    }
+    .decor {
+      position: fixed;
+      pointer-events: none;
+      animation: moveDecor 15s infinite linear;
+    }
+    @keyframes moveDecor {
+      0% { transform: translateY(-50px); }
+      50% { transform: translateY(50px); }
+      100% { transform: translateY(-50px); }
+    }
+    .decor1 {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      top: 20%;
+      left: 20%;
+    }
+    .decor2 {
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+    }
+    .decor3 {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      top: 80%;
+      left: 80%;
+    }
+    header {
+      color: #6c757d;
+      padding: 10px;
+      text-align: left; /* Align text to the left */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end; /* Align items to the bottom */
+    }
+    .logo {
+      width: 100px; /* Adjust size as needed */
+      height: auto;
+      background-image: url('logo.png'); /* Specify the correct path to your logo image */
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    form {
+      background-color: rgba(230, 230, 250, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(154, 160, 175, 0.2);
+    }
+    form input, form select, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: #fff;
+      color: #4a4e69;
+    }
+    form button {
+      background-color: #add8e6;
+      color: #fff;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #87ceeb;
+    }
+    /* New Styles */
+    .content {
+      text-align: center;
+    }
 
-        <div class="content">
-                <h1 style="text-align: center;">Welcome to Our Website</h1>
-                <div style="padding: 20px; background-color: rgba(87, 172, 237, 0.97); margin: 0 auto; max-width: 600px;">
-                    <p style="text-indent: 20px; line-height: 2.0;"></p>
-                        Introducing AUC Deliver, your reliable gateway to seamless campus logistics within the AUC community! At AUC Deliver, we specialize in providing a hassle-free solution for getting packages from the university gates straight to your desired location within the campus. Gone are the days of navigating through crowded pathways or struggling with heavy packages. With AUC Deliver, you can count on our dedicated team to swiftly transport your packages from the entrance gates directly to your dorm, classroom, or any other designated spot within the campus. Our process is simple: just schedule a pickup through our user-friendly app, and our efficient delivery team will take care of the rest. Whether it's textbooks, care packages from home, or online orders, we ensure your packages reach you safely and on time, so you can focus on what matters most – your studies and campus life. Join the AUC Deliver community today and experience the convenience of seamless package delivery tailored specifically for the AUC campus. Trust AUC Deliver to bridge the gap between the gates and your destination, making campus logistics easier than ever before.ery tailored specifically for the AUC campus. Trust AUC Deliver to bridge the gap between the gates and your destination, making campus logistics easier than ever before.ery tailored specifically for the AUC campus. Trust AUC Deliver to bridge the gap between the gates and your destination, making campus logistics easier than ever before.ery tailored specifically for the AUC campus. Trust AUC Deliver to bridge the gap between the gates and your destination, making campus logistics easier than ever before.
-                    </p>
-                </div>
-        </div>
+    .content h1 {
+      color: #333; /* Adjust the color as needed */
+      font-size: 2.5em; /* Adjust the font size as needed */
+    }
+
+    .content div {
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 900px;
+      border-radius: 100px; /* Adjust the border-radius to create a cloud shape */
+      background-color: #f4f7f6; /* Cloud color */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+      position: relative; /* Ensure proper stacking context */
+      overflow: hidden; /* Hide overflowing shadow */
+    }
+
+    .content p {
+      text-indent: 20px;
+      line-height: 2.0;
+      font-size: 1.2em; /* Adjust the font size as needed */
+      color: #555; /* Adjust the color as needed */
+    }
+  </style>
+</head>
+<body>
+  <div id="background"></div> <!-- Elemental background -->
+
+  <!-- Navigation Bar -->
+  <nav id="navbar">
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li> 
+      <li><a href="order.html">Order</a></li>
+      <li><a href="index.html">Login</a></li>
+
+    </ul>
+  </nav>
+
+  <div class="figure figure2"></div>
+  <div class="figure figure3"></div>
+  <!-- Additional decorative elements -->
+  <div class="decor decor1"></div>
+  <div class="decor decor2"></div>
+  <div class="decor decor3"></div>
+
+  <header>
+    <div class="logo"><logo class="png"></logo></div>
+  </header>
+  
+  <div class="content">
+    <h1>Welcome to Our Website</h1>
+    <div>
+      <p>
+        <strong>
+        <italic>
+            Introducing AUC Deliver, your reliable gateway to seamless campus logistics within the AUC community! At AUC Deliver, we specialize in providing a hassle-free solution for getting packages from the university gates straight to your desired location within the campus. Gone are the days of navigating through crowded pathways or struggling with heavy packages. With AUC Deliver, you can count on our dedicated team to swiftly transport your packages from the entrance gates directly to your dorm, classroom, or any other designated spot within the campus. Our process is simple: just schedule a pickup through our user-friendly app, and our efficient delivery team will take care of the rest. Whether it's textbooks, care packages from home, or online orders, we ensure your packages reach you safely and on time, so you can focus on what matters most – your studies and campus life. Join the AUC Deliver community today and experience the convenience of seamless package delivery tailored specifically for the AUC campus. Trust AUC Deliver to bridge the gap between the gates and your destination, making campus logistics easier than ever before.
+        </italic>
+        </strong>
+      </p>
+    </div>
+  </div>
 </body>
 </html>
